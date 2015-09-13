@@ -7,4 +7,8 @@ import org.bukkit.plugin.java.JavaPlugin
  */
 class ScalaLang extends JavaPlugin {
 
+  override def onEnable(): Unit = {
+    saveResource("application.conf", false);
+    System.setProperty("config.file", s"${getDataFolder.getAbsolutePath}/application.conf")
+  }
 }

@@ -51,4 +51,5 @@ dependencies {
     bundle "org.scala-lang:scala-library:2.11.7"
     bundle 'com.h2database:h2:1.4.188'
     bundle 'com.typesafe.slick:slick_2.11:3.0.3'
+    bundle 'org.slf4j:slf4j-nop:1.7.12'
 }
