@@ -1,5 +1,5 @@
 name: ScalaLang
 main: io.ruben.minecraft.ScalaLang
-version: 2.11.7
+version: 2.11-1
 load: STARTUP
 database: false
