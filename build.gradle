@@ -1,5 +1,5 @@
 group 'io.ruben.minecraft'
-version '2.11-1'
+version '2.11-2'
 
 apply plugin: 'scala'
 
@@ -17,9 +17,15 @@ repositories {
 }
 
 sourceSets {
+    api {
+        scala {
+            srcDirs = ['src/api/scala']
+            output.classesDir = 'build/classes/api'
+        }
+    }
     main {
         scala {
-            srcDirs = ['src/main/scala']
+            srcDirs = ['src/main/scala', 'src/api/scala']
         }
         resources {
             srcDirs = ['src/main/resources']
@@ -28,17 +34,24 @@ sourceSets {
 }
 
 task copyPlugin(type: Copy, dependsOn: jar) {
-    from 'build/libs'
+    from 'build/libs/main'
     include '**/*.jar'
     into pluginsFolder
 }
 
 jar {
+    destinationDir = file('build/libs/main')
     from { // use of closure defers evaluation until execution time
         configurations.bundle.collect {
             zipTree(it)
         }
     }
+}
+
+task jarAPI(type: Jar, dependsOn: classes) {
+    classifier = 'api'
+    destinationDir = file('build/libs/api')
+    from sourceSets.api.output
 }
 
 configurations {
@@ -52,4 +65,10 @@ dependencies {
     bundle 'com.h2database:h2:1.4.188'
     bundle 'com.typesafe.slick:slick_2.11:3.0.3'
     bundle 'org.slf4j:slf4j-nop:1.7.12'
+    bundle 'com.zaxxer:HikariCP:2.4.1'
+
+    apiCompile 'org.spigotmc:spigot-api:+'
+    apiCompile 'org.scala-lang:scala-library:2.11.7'
+    apiCompile 'com.typesafe.slick:slick_2.11:3.0.3'
+
 }
