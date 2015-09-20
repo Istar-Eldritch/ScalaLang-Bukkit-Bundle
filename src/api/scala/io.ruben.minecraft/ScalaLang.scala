@@ -1,5 +1,6 @@
 package io.ruben.minecraft
 
+import slick.driver.JdbcDriver
 import slick.jdbc.JdbcBackend.Database
 
 /**
@@ -7,4 +8,5 @@ import slick.jdbc.JdbcBackend.Database
  */
 trait ScalaLang {
   def getDb: Database
+  def getDriver: JdbcDriver
 }

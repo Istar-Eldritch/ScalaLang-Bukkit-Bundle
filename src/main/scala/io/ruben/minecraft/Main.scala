@@ -1,7 +1,7 @@
 package io.ruben.minecraft
 
 import org.bukkit.plugin.java.JavaPlugin
-import slick.jdbc.JdbcBackend.Database
+import slick.driver.JdbcProfile
 
 /**
  * Created by istar on 13/09/15.
@@ -18,4 +18,6 @@ class Main extends JavaPlugin with ScalaLang {
   }
 
   override def getDb = DBHandler.db
+
+  override def getDriver = DBHandler.driver
 }
